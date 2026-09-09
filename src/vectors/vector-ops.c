@@ -8,8 +8,8 @@
 #define VOCABULARY_SIZE 10
 
 //vector dotproduct/scalar product
-float dot_product(const float* vec_a,const float* vec_b,const int dim){
-    float sum=0.0f;
+float dot_product(const float* vec_a,const float* vec_b,const int dim,float sum){
+   sum=0.0f;
     for(int i=0; i<dim; i++){
         sum+=vec_a[i] * vec_b[i];
     }
@@ -17,8 +17,8 @@ float dot_product(const float* vec_a,const float* vec_b,const int dim){
 }
 
 //scalar multiplication
-float* scalar_mul(const float scalar,const float* vec,const int dim){
-    float* result={0.0f,0.0f,0.0f};
+float* scalar_mul(const float scalar,const float* vec,const int dim,float* result){
+
     for(int i=0; i<dim; i++){
         result[i]=scalar*vec[i];
     }
@@ -27,9 +27,7 @@ float* scalar_mul(const float scalar,const float* vec,const int dim){
 
 //normalizing a vector
 float* normalize_vector( float* vec,const int dim){
-    // float* result={0.0f,0.0f,0.0f};
-    //find the maximum
-    float* max=FLT_MAX;
+    float max=FLT_MAX;
     for(int i=0; i<dim; i++){
         if(vec[i]>max){
             max=vec[i];
@@ -37,7 +35,7 @@ float* normalize_vector( float* vec,const int dim){
     }
 
     //find the minimum
-    float* min=FLT_MIN;
+    float min=FLT_MIN;
     for(int i=0; i<dim; i++){
         if(vec[i]>min){
             min=vec[i];
@@ -88,7 +86,7 @@ Vocabulary vocs[VOCABULARY_SIZE]={
     {"apple",  {67.3f, 15.6f, 88.2f}},
     {"banana", {68.1f, 16.2f, 87.5f}},
     {"orange", {66.8f, 14.9f, 89.1f}}
-}
+};
 
 int main(){
     return 0;
