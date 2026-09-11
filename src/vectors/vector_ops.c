@@ -4,10 +4,15 @@
 #include <float.h>
 #include <math.h>
 #include<errno.h>
+#include<stdlib.h>
 #include "vector_ops.h"
 
-
-
+void print_lines(){
+    for(int i=0; i<=50; i++){
+        printf("-");
+    }
+    printf("\n");
+}
 
 void print_vector(float* vec,const int dim){
 for(int i=0; i<dim; i++){
@@ -15,25 +20,15 @@ for(int i=0; i<dim; i++){
 }
 }
 
-float* add_vectors(float* vec1,float* vec2,float* result){
-if(sizeof(vec1)!=sizeof(vec2)){
-    printf("Vectors should have the same dimensions!",errno);
-    return;
-}
-int size=(sizeof(vec1)/vec1[0]);
-for(int i=0; i<size; i++){
+float* add_vectors(float* vec1,float* vec2,float* result,const int dim){
+for(int i=0; i<dim; i++){
     result[i]=vec1[i]+vec2[i];
 }
 return result;
 }
 
-float* minus_vectors(float* vec1,float* vec2,float* result){
-if(sizeof(vec1)!=sizeof(vec2)){
-    printf("Vectors should have the same dimensions!",errno);
-    return;
-}
-int size=(sizeof(vec1)/vec1[0]);
-for(int i=0; i<size; i++){
+float* minus_vectors(float* vec1,float* vec2,float* result,const int dim){
+for(int i=0; i<dim; i++){
     result[i]=vec1[i]-vec2[i];
 }
 return result;
@@ -69,9 +64,9 @@ float* scalar_mul(const float scalar,const float* vec,const int dim,float* resul
 }
 
 float return_min(float* vec,const int dim){
-float min=FLT_MIN;
+float min=vec[0];
     for(int i=0; i<dim; i++){
-        if(vec[i]>min){
+        if(vec[i]<min){
             min=vec[i];
         }
     }
@@ -79,7 +74,7 @@ float min=FLT_MIN;
 }
 
 float return_max(float* vec,const int dim){
-float max=FLT_MAX;
+float max=vec[0];
     for(int i=0; i<dim; i++){
         if(vec[i]>max){
             max=vec[i];
@@ -107,20 +102,14 @@ for(int i=0; i<dim; i++){
 return sqrtf(sum);
 }
 
-float euclidean(const float a,const float b,const int dim){
+float euclidean(float* a,float* b,const int dim){
     float sum=0.0f;
     for(int i=0; i<dim; i++){
-        float diff=a-b;
-        sum+=diff*diff;
+        float* diff;
+        diff[i]=a[i]-b[i];
+        sum+=diff[i]*diff[i];
     }
     return sqrtf(sum);
-}
-
-void print_lines(){
-    for(int i=0; i<=50; i++){
-        printf("-");
-    }
-    printf("\n");
 }
 
 
@@ -141,13 +130,9 @@ Vocabulary vocs[VOCABULARY_SIZE]={
 
 float* get_embed(char str[]){
 for(int i=0; i<VOCABULARY_SIZE; i++){
-    if(strcmp(str,vocs[i].word)){
+    if(strcmp(str,vocs[i].word)==0){
     return vocs[i].embed;
     }
 }
 return NULL;
-}
-
-int main(){
-    return 0;
 }

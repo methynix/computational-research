@@ -13,6 +13,8 @@ typedef struct{
     float embed[EMBED_LENGTH];
 }Vocabulary;
 
+void print_lines();
+
 Vector create_vector(const int SIZE);
 #endif
 
