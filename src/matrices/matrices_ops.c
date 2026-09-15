@@ -69,10 +69,14 @@ float** matrix_mul(const int rows_A,const int cols_A,const int rows_B,
                                                 const int cols_B, float** mtx_a, float** mtx_b,float** result){
 if(cols_A!=rows_B){
     printf("ERROR %d Multiplication is impossible because the number of columns of A is not equal to the number of rows of B",errno);
-    return -1
+    return -1;
 }
-for(int i=0; i<rows; i++){
-    for(int j=0; j<cols; j++){
+for(int i=0; i<rows_A; i++){
+    for(int j=0; j<cols_B; j++){
+        result[i][j]=0;
+        for (int k=0; k<cols_A; k++){
+           result[i][j]+= mtx_a[i][k]*mtx_b[k][j];
+        }
                                                                       
     }
 }

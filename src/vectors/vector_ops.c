@@ -63,25 +63,7 @@ float* scalar_mul(const float scalar,const float* vec,const int dim,float* resul
     return result;
 }
 
-float return_min(float* vec,const int dim){
-float min=vec[0];
-    for(int i=0; i<dim; i++){
-        if(vec[i]<min){
-            min=vec[i];
-        }
-    }
-    return min;
-}
 
-float return_max(float* vec,const int dim){
-float max=vec[0];
-    for(int i=0; i<dim; i++){
-        if(vec[i]>max){
-            max=vec[i];
-        }
-    }
-    return max;
-}
 
 float* normalize_vector( float* vec,const int dim){
     

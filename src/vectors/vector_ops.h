@@ -15,6 +15,16 @@ typedef struct{
 
 void print_lines();
 
+void print_vector(float* vec, const int dim);
+
+float* add_vectors(float* vec_a, float* vec_b, float* result, const int dim);
+
+float* minus_vectors(float* vec_a,float* vec_b,float* result,const int dim);
+
 Vector create_vector(const int SIZE);
+
+void free_vector(Vector* v);
+
+float dot_product(const float* vec_a, const float* vec_b,float* result)
 #endif
 
