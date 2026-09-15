@@ -21,42 +21,45 @@ float max=vec[0];
     }
     return max;
 }
+
 float mean(float * arr,const int ttl){
     float sum=0;
     for(int i=0; i<ttl; i++){
         sum+=arr[i];
     }
-return sum;
+return (sum/ttl);
 }
 
 float var(float * arr,const int ttl){
     float mn=mean(arr,ttl);
     float sum_var;
     for(int i=0; i<ttl; i++){
-       sum_var+= arr[i]-mn;
+       sum_var+= (arr[i]-mn)*(arr[i]-mn);
     }
-    return sum_var;
+    return (sum_var/ttl);
 }
 
 float std(float * arr, const int ttl){
-  float sd=var(arr,ttl);
-  return sd;
+  return sqrtf(var(arr,ttl));
 }
 
-float covariance(float* list_a,const int ttl_a, float* list_b,const int ttl_b){
-float mean_a=mean(list_a,ttl_a);
-float mean_b=mean(list_b,ttl_b);
-for(int i=0; i<ttl_a; i++){
-
+float covariance(float* list_a, float* list_b,const int ttl){
+float mean_a=mean(list_a,ttl);
+float mean_b=mean(list_b,ttl);
+float summation=0.0;
+for(int i=0; i<ttl; i++){
+summation +=(list_a[i]-mean_a)*(list_b[i]-mean_b);
 }
-for(int i=0; i<ttl_b; i++){
-
-}
+return summation/(ttl-1);
 }
 
-float correlation(float* list_a,const int ttl_a, float* list_b,const int ttl_b){
-    float cov=covariance( list_a,ttl_a,  list_b,ttl_b);
-    return cov/(std(list_a,ttl_a)*std(list_b,ttl_b));
+float correlation(float* list_a,float* list_b,const int ttl){
+    float cov=covariance( list_a,  list_b,ttl);
+    return cov/(std(list_a,ttl)*std(list_b,ttl));
+}
+
+float** correlation_matrix(){
+    
 }
 int main(){
 
