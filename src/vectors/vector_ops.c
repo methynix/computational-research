@@ -95,6 +95,8 @@ float euclidean(float* a,float* b,const int dim){
 }
 
 
+
+
 Vocabulary vocs[VOCABULARY_SIZE]={
     {"dog",    {45.6f, 32.0f, 43.2f}},
     {"cat",    {46.7f, 31.5f, 42.8f}},

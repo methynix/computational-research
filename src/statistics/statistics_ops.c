@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdarg.h>
 
 float return_min(float* vec,const int dim){
 float min=vec[0];
@@ -58,9 +59,26 @@ float correlation(float* list_a,float* list_b,const int ttl){
     return cov/(std(list_a,ttl)*std(list_b,ttl));
 }
 
-float** correlation_matrix(){
-    
+float** correlation_matrix(float** result,const int ttl,const int n_vars,...){
+ va_list args;
+ va_start(args,ttl);
+
+ float* variables[n_vars];
+
+ for(int i=0; i<n_vars; i++){
+variables[i]=va_arg(args,float*);
+ }
+
+ for(int i=0; i<n_vars; i++){
+    for (int j=0; j<n_vars; j++){
+ result[i][j]=correlation(result[i],result[j],ttl);
+    }
+ }
+
+va_end(args);
+ return result;
 }
+
 int main(){
 
     return 0;

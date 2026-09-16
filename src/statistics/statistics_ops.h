@@ -8,4 +8,6 @@ float var(float * arr,const int ttl);
 float std(float * arr, const int ttl);
 float covariance(float* list_a,int ttl_a, float* list_b,int ttl_b);
 float correlation(float* list_a,float* list_b,const int ttl);
+float** correlation_matrix(float** result,const int ttl,const int n_vars,...);
+
 #endif
